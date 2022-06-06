@@ -1,21 +1,5 @@
-<h1>Good vs Bad onPush</h1>
-
-<div *ngIf="false">
-  <h2>Default change strategy</h2>
-  <app-default-change-strategy
-    [data]="data$ | async"
-  ></app-default-change-strategy>
-</div>
-
-<div *ngIf="true">
-  <h2>Good use</h2>
-  <!-- <app-good-on-push [data]="data$ | async"></app-good-on-push>
+<h2>Good use</h2>
+<!-- <app-good-on-push [data]="data$ | async"></app-good-on-push>
   <app-good-on-push [data]="data$ | async"></app-good-on-push> -->
-  <app-good-on-push [data]="value1"></app-good-on-push>
-  <app-good-on-push [data]="value2"></app-good-on-push>
-</div>
-
-<div *ngIf="false">
-  <h2>Bad use</h2>
-  <app-bad-on-push [data]="data$"></app-bad-on-push>
-</div>
+<app-good-on-push [data]="value1"></app-good-on-push>
+<app-good-on-push [data]="value2"></app-good-on-push>

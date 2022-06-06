@@ -11,7 +11,7 @@ export class AppComponent  {
     data$: Observable<any>;
 
     constructor(){
-      this.data$ = interval(5000);
+      // this.data$ = interval(5000);
     }
 
     value1 = 10;
