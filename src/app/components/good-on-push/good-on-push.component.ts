@@ -1,36 +1,45 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Input,
+  OnDestroy,
+  SimpleChanges,
+} from '@angular/core';
+import { CommunicationService } from '../../service/message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-good-on-push',
   templateUrl: './good-on-push.component.html',
   styleUrls: ['./good-on-push.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoodOnPushComponent implements OnInit {
-
-  brol1: number = 0;
-  brol2: number = 0;
-
+export class GoodOnPushComponent implements OnInit, OnDestroy {
   private _data: any = null;
+  subscription: Subscription;
 
   @Input()
   set data(data) {
-    console.log('Data was pushed: ', data)
     this._data = data;
+    this.communication.setRequest(this._data);
   }
 
-  constructor() { }
-
-  ngOnInit() {
-   
+  constructor(private communication: CommunicationService) {
+    this.subscription = this.communication.onMessage().subscribe((message) => {
+       console.log(message);
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
-    console.log('change detected');
+  ngOnInit() {}
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  getDisplayValue(){
+  ngOnChanges(changes: SimpleChanges) {}
+
+  getDisplayValue() {
     return this._data;
   }
 }
